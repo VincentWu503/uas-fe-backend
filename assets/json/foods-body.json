@@ -1,0 +1,42 @@
+[
+    {
+        "item_name": "Ayam Bakar Goreng (ABG)",
+        "category": "main-dish",
+        "dine_in_price": 26000,
+        "online_price": 21000,
+        "description": "Andalan warung makan Ayam Bakar Ojolali. Dibuat dengan ayam yang empuk dan berkualitas, hidangan ini dibuat dengan membakar ayam yang dioleskan bumbu khas Ojolali terlebih dahulu, kemudian digoreng dengan baluran telur.",
+        "image_name": "ayam-bakar-goreng-abg.jpeg"
+    },
+    {
+        "item_name": "Iga Bakar",
+        "category": "main-dish",
+        "dine_in_price": 40000,
+        "online_price": 32000,
+        "description": "Iga bakar dengan citarasa yang manis menggunakan bumbu-bumbu yang terpilih.",
+        "image_name": "iga-bakar.jpeg"
+    },
+    {
+        "item_name": "Nasi",
+        "category": "add-on",
+        "dine_in_price": 5000,
+        "online_price": 4000,
+        "description": "Nasi putih pendamping makanan. Cukup jelas.",
+        "image_name": "nasi.jpeg"
+    },
+    {
+        "item_name": "Tempe",
+        "category": "add-on",
+        "dine_in_price": 2500,
+        "online_price": 1500,
+        "description": "Tempe dengan bumbu khas yang menggugah selera.",
+        "image_name": "es-teh-manis.jpeg"
+    },
+    {
+        "item_name": "Es teh manis",
+        "category": "drink",
+        "dine_in_price": 6000,
+        "online_price": 4000,
+        "description": "Walaupun ini adalah minuman teh yang sudah umum, namun minuman ini sangat menyegarkan sekali lho....",
+        "image_name": "es-teh-manis.jpeg"
+    }
+]
