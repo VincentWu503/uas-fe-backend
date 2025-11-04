@@ -2,41 +2,201 @@
     {
         "item_name": "Ayam Bakar Goreng (ABG)",
         "category": "main-dish",
-        "dine_in_price": 26000,
-        "online_price": 21000,
+        "dine_in_price": 21000,
+        "online_price": 26000,
         "description": "Andalan warung makan Ayam Bakar Ojolali. Dibuat dengan ayam yang empuk dan berkualitas, hidangan ini dibuat dengan membakar ayam yang dioleskan bumbu khas Ojolali terlebih dahulu, kemudian digoreng dengan baluran telur.",
         "image_name": "ayam-bakar-goreng-abg.jpeg"
     },
     {
         "item_name": "Iga Bakar",
         "category": "main-dish",
-        "dine_in_price": 40000,
-        "online_price": 32000,
+        "dine_in_price": 32000,
+        "online_price": 40000,
         "description": "Iga bakar dengan citarasa yang manis menggunakan bumbu-bumbu yang terpilih.",
         "image_name": "iga-bakar.jpeg"
     },
     {
         "item_name": "Nasi",
         "category": "add-on",
-        "dine_in_price": 5000,
-        "online_price": 4000,
+        "dine_in_price": 4000,
+        "online_price": 5000,
         "description": "Nasi putih pendamping makanan. Cukup jelas.",
         "image_name": "nasi.jpeg"
     },
     {
         "item_name": "Tempe",
         "category": "add-on",
-        "dine_in_price": 2500,
-        "online_price": 1500,
+        "dine_in_price": 1500,
+        "online_price": 2500,
         "description": "Tempe dengan bumbu khas yang menggugah selera.",
-        "image_name": "es-teh-manis.jpeg"
+        "image_name": "tempe.jpeg"
     },
     {
         "item_name": "Es teh manis",
         "category": "drink",
-        "dine_in_price": 6000,
-        "online_price": 4000,
+        "dine_in_price": 4000,
+        "online_price": 6000,
         "description": "Walaupun ini adalah minuman teh yang sudah umum, namun minuman ini sangat menyegarkan sekali lho....",
         "image_name": "es-teh-manis.jpeg"
+    },
+    {
+        "item_name": "Ayam Bakar", 
+        "category": "main-dish",
+        "dine_in_price": 19000,
+        "online_price": 23000,
+        "description": "Best Seller Ayam Bakar dengan bumbu khas yang meresap hingga ke dalam daging ayamnya, menjadikan hidangan ini sangat lezat dan menggugah selera.",
+        "image_name": "ayam-bakar.jpeg"
+    },
+    {
+        "item_name": "Ayam Penyet", 
+        "category": "main-dish",
+        "dine_in_price": 19000,
+        "online_price": 23000,
+        "description": "Ayam Goreng yang di penyet dengan ulekan agar sedikit pipih, lalu disajikan dengan samabal pedas",
+        "image_name": "ayam-penyet.jpeg"
+    },
+    {
+        "item_name": "Ayam Goreng Kremes", 
+        "category": "main-dish",
+        "dine_in_price": 21000,
+        "online_price": 26000,
+        "description": "Hidangan Ayam goreng yang empuk didalam dan renyah diluar dengan taburan kremes yang gurih",
+        "image_name": "ayam-goreng-kremes.jpeg"
+    },
+    {
+        "item_name": "Ikan Gurame Bakar / Nila Bakar", 
+        "category": "main-dish",
+        "dine_in_price": 22000,
+        "online_price": 27000,
+        "description": "Ikan Gurame atau Nila yang dibakar dengan bumbu rempah, hingga dagingnya lembut dan terasa gurih",
+        "image_name": "ikan-gurame-bakar.jpeg"
+    },
+    {
+        "item_name": "Ikan Gurame Goreng / Nila Goreng", 
+        "category": "main-dish",
+        "dine_in_price": 22000,
+        "online_price": 27000,
+        "description": "Ikan Gurame atau Nila yang digoreng hingga renyah dan gurih. Disajikan dengan Sambal OJolali",
+        "image_name": "ikan-gurame-goreng.jpeg"
+    },
+    {
+        "item_name": "Sop Iga", 
+        "category": "main-dish",
+        "dine_in_price": 32000,
+        "online_price": 40000,
+        "description": "Iga Bakar yang direbus dalam waktu lama dengan bumbu rempah pilihan, sehingga menghasilkan kuah sop yang gurih dan daging iga yang empuk",
+        "image_name": "sop-iga.jpeg"
+    },
+    {
+        "item_name": "Cah Kangkung", 
+        "category": "add-on",
+        "dine_in_price": 7000,
+        "online_price": 9000,
+        "description": "Hidangan tumis kangkung yang dimasak dengan api besar dan fibumbui dengan saus tiram serta bumbu pilihan Ojolali",
+        "image_name": "cah-kangkung.jpeg"
+    },
+    {
+        "item_name": "Sayur Asem", 
+        "category": "add-on",
+        "dine_in_price": 3000,
+        "online_price": 4000,
+        "description": "Hidangan Kuah yang dibuat dari berbagai sayuran segar dengan rasa asam yang menyegarkan",
+        "image_name": "sayur-asem.jpeg"
+    },
+    {
+        "item_name": "Tahu",
+        "category": "add-on",
+        "dine_in_price": 1500,
+        "online_price": 2500,
+        "description": "Tahu dengan bumbu khas yang menggugah selera.",
+        "image_name": "tahu.jpeg"
+    },
+    {
+        "item_name": "Kremesan",
+        "category": "add-on",
+        "dine_in_price": 1500,
+        "online_price": 2500,
+        "description": "adonan Tepung yang digoreng hingga renyah sebagai pelengkap hidangan ayam goreng.",
+        "image_name": "kremesan.jpeg"
+    },
+    {
+        "item_name": "Aqua",
+        "category": "drink",
+        "dine_in_price": 4000,
+        "online_price": 5000,
+        "description": "Air mineral dalam kemasan botol untuk menemani hidangan Anda.",
+        "image_name": "aqua.jpeg"
+    },
+    {
+        "item_name": "Es Teh Tawar",
+        "category": "drink",
+        "dine_in_price": 2000,
+        "online_price": 4000,
+        "description": "Walaupun ini adalah minuman teh yang sudah umum, namun minuman ini sangat menyegarkan sekali lho....",
+        "image_name": "es-teh-tawar.jpeg"
+    },
+    {
+        "item_name": "Nasi Ayam Bakar Goreng (ABG)",
+        "category": "main-dish",
+        "dine_in_price": 25000,
+        "online_price": 30000,
+        "description": "Andalan warung makan Ayam Bakar Ojolali. Dibuat dengan ayam yang empuk dan berkualitas, hidangan ini dibuat dengan membakar ayam yang dioleskan bumbu khas Ojolali terlebih dahulu, kemudian digoreng dengan baluran telur.",
+        "image_name": "ayam-bakar-goreng-abg.jpeg"
+    },
+    {
+        "item_name": "Nasi Ayam Bakar", 
+        "category": "main-dish",
+        "dine_in_price": 23000,
+        "online_price": 28000,
+        "description": "Best Seller Ayam Bakar dengan bumbu khas yang meresap hingga ke dalam daging ayamnya, menjadikan hidangan ini sangat lezat dan menggugah selera.",
+        "image_name": "ayam-bakar.jpeg"
+    },
+    {
+        "item_name": "Nasi Ayam Penyet", 
+        "category": "main-dish",
+        "dine_in_price": 23000,
+        "online_price": 28000,
+        "description": "Ayam Goreng yang di penyet dengan ulekan agar sedikit pipih, lalu disajikan dengan samabal pedas",
+        "image_name": "ayam-penyet.jpeg"
+    },
+    {
+        "item_name": "Nasi Ayam Goreng Kremes", 
+        "category": "main-dish",
+        "dine_in_price": 25000,
+        "online_price": 30000,
+        "description": "Hidangan Ayam goreng yang empuk didalam dan renyah diluar dengan taburan kremes yang gurih",
+        "image_name": "ayam-goreng-kremes.jpeg"
+    },
+    {
+        "item_name": "Nasi Sop Iga", 
+        "category": "main-dish",
+        "dine_in_price": 35000,
+        "online_price": 45000,
+        "description": "Iga Bakar yang direbus dalam waktu lama dengan bumbu rempah pilihan, sehingga menghasilkan kuah sop yang gurih dan daging iga yang empuk",
+        "image_name": "sop-iga.jpeg"
+    },
+    {
+        "item_name": "Nasi Iga Bakar",
+        "category": "main-dish",
+        "dine_in_price": 35000,
+        "online_price": 45000,
+        "description": "Iga bakar dengan citarasa yang manis menggunakan bumbu-bumbu yang terpilih.",
+        "image_name": "iga-bakar.jpeg"
+    },
+    {
+        "item_name": "Ikan Gurame Bakar / Nila Bakar", 
+        "category": "main-dish",
+        "dine_in_price": 25000,
+        "online_price": 31000,
+        "description": "Ikan Gurame atau Nila yang dibakar dengan bumbu rempah, hingga dagingnya lembut dan terasa gurih",
+        "image_name": "ikan-gurame-bakar.jpeg"
+    },
+    {
+        "item_name": "Ikan Gurame Goreng / Nila Goreng", 
+        "category": "main-dish",
+        "dine_in_price": 25000,
+        "online_price": 31000,
+        "description": "Ikan Gurame atau Nila yang digoreng hingga renyah dan gurih. Disajikan dengan Sambal OJolali",
+        "image_name": "ikan-gurame-goreng.jpeg"
     }
 ]
