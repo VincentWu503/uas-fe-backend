@@ -2,6 +2,19 @@ const usersModel = require('../models/users_model.js');
 const pass = require('../utils/password_encryptor.js');
 const { validationResult } = require('express-validator');
 
+// TO-DO :  - CREATE UPDATE USER INFO 
+//          - CREATE UPDATE USER PASSWORD
+//          - CREATE DELETE USER API
+// TO-DO :  - CREATE USER LOGIN AND LOGOUT  
+
+exports.userLogin = async (req, res, next) => {
+
+}
+
+exports.userLogout = async (req, res, next) => {
+
+}
+
 exports.getAllUsers = async (req, res, next) =>{
     try {
         const users = await usersModel.fetchAll();
@@ -12,17 +25,6 @@ exports.getAllUsers = async (req, res, next) =>{
     }  
 }
 
-// exports.getUser = async (req, res, next) => {
-//     try {
-//         const userId = req.params.id
-//         const user = await usersModel.fetchUser(userId);
-
-//         if (user) return res.status(200).json(user);
-//     } catch (err) {
-//         return next(err);
-//     }  
-// }
-
 exports.createUser = async (req, res, next) => {
     try{
         const validationError = validationResult(req)
@@ -32,7 +34,8 @@ exports.createUser = async (req, res, next) => {
         const {
             username,
             email,
-            password
+            password,
+            confirm_password
         } = req.body;
 
         const dbUsername = await usersModel.checkUsername(username);
@@ -45,8 +48,15 @@ exports.createUser = async (req, res, next) => {
             return res.status(409).send("Email already exists!");
         }
 
-        const hashedPassword = await pass.hashPassword(password)
+        const confirmMatched = (password === confirm_password) ? true : false
 
+        let hashedPassword;
+        if (confirmMatched){
+            hashedPassword = await pass.hashPassword(password)
+        } else{
+            return res.status(400).send("Password and confirm password doesn't match!")
+        }
+       
         const created = await usersModel.createUser(
             username,
             email,
@@ -59,10 +69,7 @@ exports.createUser = async (req, res, next) => {
     }
 }
 
-// TO-DO :  - CREATE UPDATE USER INFO 
-//          - CREATE UPDATE USER PASSWORD
-//          - CREATE USER LOGIN AND LOGOUT  
-exports.updateUser = async (req, res, next) => {
+exports.updateUserInfo = async (req, res, next) => {
     try{
         const validationError = validationResult(req)
         if (!validationError.isEmpty()){

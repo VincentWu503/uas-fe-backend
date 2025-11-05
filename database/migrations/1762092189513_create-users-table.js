@@ -18,7 +18,7 @@ export const up = (pgm) => {
         username: { 
             type: 'VARCHAR(32)',
             notNull: true, 
-            unique: true,
+            unique: false,
         },
         email: {
             type: 'VARCHAR(255)',

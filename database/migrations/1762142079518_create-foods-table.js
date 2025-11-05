@@ -37,7 +37,11 @@ export const up = (pgm) => {
             notNull: true,
             default: ''
         },
-        image: {
+        image_format: {
+            type: 'VARCHAR(16)',
+            notNull: true,
+        },
+        image_bytes: {
             type: 'BYTEA',
             notNull: true,
         },

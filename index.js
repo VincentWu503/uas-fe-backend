@@ -5,10 +5,11 @@ const app = express()
 require('dotenv').config()
 const port = process.env.HOST_PORT || 3000
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '2mb'}))
 app.use(cors())
 app.use(
   bodyParser.urlencoded({
+    limit: '2mb',
     extended: true,
   })
 )
