@@ -12,7 +12,7 @@ exports.getFoods = async (req, res, next) =>{
 
         let result = []
         dbFoods.forEach(food => {
-            const base64Str = food.image_base64.toString('base64');
+            const base64Str = food.image_bytes.toString('base64');
             let obj = { 
                 item_id: food.item_id,
                 item_name: food.item_name,
@@ -43,7 +43,7 @@ exports.getFoodById = async (req, res, next) => {
 
         const food =  await foodsModel.fetchOne(foodId);
 
-        const base64Str = food.image_base64.toString('base64');
+        const base64Str = food.image_bytes.toString('base64');
         if (food){
             return res.status(200).json({
                 message: `Fetched food with item_id ${foodId}`,
@@ -161,7 +161,7 @@ exports.updateFoodById = async (req, res, next) => {
             const matched = image_base64_url.match(/^data:image\/(\w+);base64,/);
             if (matched) {
                 updates.image_format = matched[1]; 
-                updates.image_base64 = Buffer.from(image_base64_url.split(',')[1], 'base64');
+                updates.image_bytes = Buffer.from(image_base64_url.split(',')[1], 'base64');
             } else {
                 return res.status(400).send("Invalid image data!");
             }

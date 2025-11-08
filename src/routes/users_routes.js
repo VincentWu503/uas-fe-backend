@@ -1,10 +1,8 @@
 const users  = require('../controllers/users_controller.js')
-const {createUserValidator} = require('../middlewares/validator.js')
 const express = require('express')
 const router = express.Router()
+const { passportAuth, checkAdminRole } = require('../middlewares/authenticate.js')
 
-router.get('/', users.getAllUsers);
-router.post('/register', createUserValidator, users.createUser)
-router.post('/login', users.userLogin)
+router.get('/', passportAuth, checkAdminRole, users.getAllUsers);
 
 module.exports = router;

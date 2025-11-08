@@ -17,6 +17,8 @@ async function hashPassword(password) {
 }
 
 async function checkDbHash(plainPassword, hashedPassword) {
+  // console.log(plainPassword);
+  // console.log(hashedPassword);
   return bcrypt.compareSync(plainPassword, hashedPassword);
 }
 

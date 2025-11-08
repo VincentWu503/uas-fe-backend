@@ -1,6 +1,9 @@
 const usersModel = require('../models/users_model.js');
 const pass = require('../utils/password_encryptor.js');
-const { validationResult } = require('express-validator');
+const { validationResult } = require('express-validator'); 
+const jwt = require('jsonwebtoken');
+const pwd = require('../utils/password_encryptor.js')
+const auth = require('../middlewares/authenticate.js')
 
 // TO-DO :  - CREATE UPDATE USER INFO 
 //          - CREATE UPDATE USER PASSWORD
@@ -8,18 +11,48 @@ const { validationResult } = require('express-validator');
 // TO-DO :  - CREATE USER LOGIN AND LOGOUT  
 
 exports.userLogin = async (req, res, next) => {
+    try {
+        const {
+            email,
+            password
+        } = req.body
+       
+        const user = await usersModel.findUserByEmail(email);
+        if (!user){
+            return res.status(404).send("Email doesn\'t exists!")
+        }
+        
+        const passwordValid = await pwd.checkDbHash(password, user.password);
 
+        if (!user || !passwordValid){
+            return res.status(401).send("Invalid email or password!");
+        }
+
+        const jwtToken = await auth.generateToken(user.id)
+        if(!jwtToken){
+            return res.status(401).send('Failed to generate token!')
+        }
+
+        return res.status(200).json({token: jwtToken})
+    } catch (err) {
+        return next(err);
+    }
 }
 
 exports.userLogout = async (req, res, next) => {
+    try {
 
+    } catch (err){
+        return next(err);
+    }
 }
 
 exports.getAllUsers = async (req, res, next) =>{
+    console.log('attached current user', req.user)
     try {
         const users = await usersModel.fetchAll();
 
-        if (users) return res.status(200).json(users);
+        if (users) return res.status(200).json({users});
     } catch (err) {
         return next(err);
     }  
@@ -38,12 +71,7 @@ exports.createUser = async (req, res, next) => {
             confirm_password
         } = req.body;
 
-        const dbUsername = await usersModel.checkUsername(username);
-        if (dbUsername.length > 0){
-            return res.status(409).send("Username already exists!");
-        }
-
-        const dbEmail = await usersModel.checkEmail(email);
+        const dbEmail = await usersModel.findUserByEmail(email);
         if (dbEmail.length > 0){
             return res.status(409).send("Email already exists!");
         }
@@ -79,10 +107,9 @@ exports.updateUserInfo = async (req, res, next) => {
         const {
             newUsername,
             newEmail,
-        } = req.body;
-        
+        } = req.body;        
         const userId = req.params.id;
-        const user = await usersModel.fetchUser(userId);
+        const user = await usersModel.findUserById(userId);
 
     } catch (err) {
         return next(err)

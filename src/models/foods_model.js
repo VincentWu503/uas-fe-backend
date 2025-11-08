@@ -8,6 +8,7 @@ exports.fetchAll = async (limit, offset) => {
         const res = await pool.query(sqlQuery, [limit, offset]);
         return res.rows;
     } catch (err) {
+        console.log(err)
         throw new Error('Failed to fetch food items', err)
     }
 }
@@ -36,7 +37,7 @@ exports.addFood = async (
         const sqlQuery = `
             INSERT INTO foods (
             item_name, category, dine_in_price, 
-            online_price, description, image_format, image_base64
+            online_price, description, image_format, image_bytes
             )
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
