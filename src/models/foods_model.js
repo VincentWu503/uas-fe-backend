@@ -1,6 +1,6 @@
 const pool = require('../config/db.js')
 
-exports.fetchAll = async (limit, offset) => {
+exports.findAll = async (limit, offset) => {
     try{
         const sqlQuery = `SELECT * FROM foods
                             ORDER BY item_id
@@ -13,7 +13,7 @@ exports.fetchAll = async (limit, offset) => {
     }
 }
 
-exports.fetchOne = async (id) => {
+exports.findOne = async (id) => {
     try{
         const sqlQuery = `SELECT * FROM foods
                         WHERE item_id = $1`

@@ -33,7 +33,7 @@
     },
     {
         "item_name": "Es teh manis",
-        "category": "drink",
+        "category": "beverages",
         "dine_in_price": 4000,
         "online_price": 6000,
         "description": "Walaupun ini adalah minuman teh yang sudah umum, namun minuman ini sangat menyegarkan sekali lho....",
@@ -89,7 +89,7 @@
     },
     {
         "item_name": "Cah Kangkung", 
-        "category": "add-on",
+        "category": "vegetables",
         "dine_in_price": 7000,
         "online_price": 9000,
         "description": "Hidangan tumis kangkung yang dimasak dengan api besar dan fibumbui dengan saus tiram serta bumbu pilihan Ojolali",
@@ -97,7 +97,7 @@
     },
     {
         "item_name": "Sayur Asem", 
-        "category": "add-on",
+        "category": "vegetables",
         "dine_in_price": 3000,
         "online_price": 4000,
         "description": "Hidangan Kuah yang dibuat dari berbagai sayuran segar dengan rasa asam yang menyegarkan",
@@ -121,7 +121,7 @@
     },
     {
         "item_name": "Aqua",
-        "category": "drink",
+        "category": "beverages",
         "dine_in_price": 4000,
         "online_price": 5000,
         "description": "Air mineral dalam kemasan botol untuk menemani hidangan Anda.",
@@ -129,7 +129,7 @@
     },
     {
         "item_name": "Es Teh Tawar",
-        "category": "drink",
+        "category": "beverages",
         "dine_in_price": 2000,
         "online_price": 4000,
         "description": "Walaupun ini adalah minuman teh yang sudah umum, namun minuman ini sangat menyegarkan sekali lho....",

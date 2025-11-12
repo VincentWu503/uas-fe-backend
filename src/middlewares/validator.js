@@ -60,6 +60,7 @@ exports.foodValidator = [
     body('description')
         .optional()
         .isString()
+        .trim().escape()
         .withMessage('Description must be of string data type!'),
 
     body('image_base64_url')
@@ -103,6 +104,7 @@ exports.foodValidator = [
 exports.updateFoodValidator = [
     body('item_name')
         .optional()
+        .trim().escape()
         .isString().withMessage('Food name must be of string data type!'),
 
     body('dine_in_price')
@@ -112,7 +114,7 @@ exports.updateFoodValidator = [
 
     body('category')
         .optional()
-        .isIn(['main-dish', 'drink', 'add-on'])
+        .isIn(['main-dish', 'beverages', 'vegetables', 'add-on'])
         .withMessage('Category must be main-dish, drink, or add-on!'),
 
     body('online_price')
@@ -123,6 +125,7 @@ exports.updateFoodValidator = [
     body('description')
         .optional()
         .isString()
+        .trim().escape()
         .withMessage('Description must be of string data type!'),
 
     body('image_base64_url')
@@ -162,3 +165,52 @@ exports.updateFoodValidator = [
             return true;
         })
 ];
+
+exports.addAddressValidator = [
+    body('alamat_lengkap')
+        .trim().escape()
+        .isString().withMessage('alamat_lengkap must be of string data type!'),
+    body('kelurahan')
+        .trim().escape()
+        .isString().withMessage('kelurahan must be of string data type!'),
+    body('kabupaten_kota')
+        .trim().escape()
+        .isString().withMessage('kabupaten_kota must be of string data type!'),
+    body('provinsi')
+        .trim().escape()
+        .isString().withMessage('provinsi must be of string data type!')
+]
+
+exports.updateAddressValidator = [
+    body('alamat_lengkap')
+        .optional()
+        .trim().escape()
+        .isString().withMessage('alamat_lengkap must be of string data type!'),
+    body('kelurahan')
+        .optional()
+        .trim().escape()
+        .isString().withMessage('kelurahan must be of string data type!'),
+    body('kabupaten_kota')
+        .optional()
+        .trim().escape()
+        .isString().withMessage('kabupaten_kota must be of string data type!'),
+    body('provinsi')
+        .optional()
+        .trim().escape()
+        .isString().withMessage('provinsi must be of string data type!')
+]
+
+exports.reviewValidator = [
+    body('stars')
+        .isInt({min: 1, max: 5}).withMessage('Rating must be between 1 - 5 stars!'),
+    body('comment')
+        .trim().escape()
+        .isString().withMessage('Comment must be of string data type!')
+]
+
+exports.restaurantReviewsEnumValidator = [
+    body('overview')
+        .optional()
+        .isIn(['rasa-enak', 'porsi-pas', 'bersih', 'lainnya'])
+        .withMessage('Review overview must be rasa-enak, porsi-pas, bersih, or "lainnya"!'),
+]

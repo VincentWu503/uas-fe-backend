@@ -1,14 +1,9 @@
 const usersModel = require('../models/users_model.js');
+const { addToBlacklist } = require('../models/jwt_blacklist_model.js')
 const pass = require('../utils/password_encryptor.js');
 const { validationResult } = require('express-validator'); 
-const jwt = require('jsonwebtoken');
 const pwd = require('../utils/password_encryptor.js')
 const auth = require('../middlewares/authenticate.js')
-
-// TO-DO :  - CREATE UPDATE USER INFO 
-//          - CREATE UPDATE USER PASSWORD
-//          - CREATE DELETE USER API
-// TO-DO :  - CREATE USER LOGIN AND LOGOUT  
 
 exports.userLogin = async (req, res, next) => {
     try {
@@ -19,7 +14,7 @@ exports.userLogin = async (req, res, next) => {
        
         const user = await usersModel.findUserByEmail(email);
         if (!user){
-            return res.status(404).send("Email doesn\'t exists!")
+            return res.status(401).send("Invalid email or password!")
         }
         
         const passwordValid = await pwd.checkDbHash(password, user.password);
@@ -41,7 +36,18 @@ exports.userLogin = async (req, res, next) => {
 
 exports.userLogout = async (req, res, next) => {
     try {
+        const header = req.headers['authorization']
+        if (!header || !header.startsWith('Bearer ')){
+            return res.status(400).send("Invalid token!");
+        }
 
+        const token = header.split(' ')[1];
+        const blacklisted = await addToBlacklist(token);
+        if (!blacklisted){
+            return res.status(500).send("Failed to log out!")
+        } else{
+            return res.status(200).send("Successfully logged out from current session.")
+        }
     } catch (err){
         return next(err);
     }
@@ -50,9 +56,9 @@ exports.userLogout = async (req, res, next) => {
 exports.getAllUsers = async (req, res, next) =>{
     console.log('attached current user', req.user)
     try {
-        const users = await usersModel.fetchAll();
+        const users = await usersModel.findAll();
 
-        if (users) return res.status(200).json({users});
+        if (users) return res.status(200).json(users);
     } catch (err) {
         return next(err);
     }  
@@ -72,7 +78,7 @@ exports.createUser = async (req, res, next) => {
         } = req.body;
 
         const dbEmail = await usersModel.findUserByEmail(email);
-        if (dbEmail.length > 0){
+        if (dbEmail){
             return res.status(409).send("Email already exists!");
         }
 
@@ -97,21 +103,21 @@ exports.createUser = async (req, res, next) => {
     }
 }
 
-exports.updateUserInfo = async (req, res, next) => {
-    try{
-        const validationError = validationResult(req)
-        if (!validationError.isEmpty()){
-            return res.status(400).json(validationError);
-        }
+// exports.updateUserInfo = async (req, res, next) => {
+//     try{
+//         const validationError = validationResult(req)
+//         if (!validationError.isEmpty()){
+//             return res.status(400).json(validationError);
+//         }
         
-        const {
-            newUsername,
-            newEmail,
-        } = req.body;        
-        const userId = req.params.id;
-        const user = await usersModel.findUserById(userId);
+//         const {
+//             newUsername,
+//             newEmail,
+//         } = req.body;        
+//         const userId = req.params.id;
+//         const user = await usersModel.findUserById(userId);
 
-    } catch (err) {
-        return next(err)
-    }
-}
+//     } catch (err) {
+//         return next(err)
+//     }
+// }

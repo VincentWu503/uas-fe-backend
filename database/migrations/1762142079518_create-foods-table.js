@@ -9,7 +9,7 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-    pgm.createType('food_category', ['main-dish', 'drink', 'add-on'])
+    pgm.createType('food_category', ['main-dish', 'beverages', 'vegetables', 'add-on'])
     pgm.createTable('foods', {
         item_id: {
             type: 'SERIAL',

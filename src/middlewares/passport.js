@@ -8,6 +8,7 @@ module.exports = (passport) => {
         secretOrKey: process.env.JWT_SECRET
         }, async (payload, done) => {
         try {
+            // console.log(payload)
             const user = await usersModel.findUserById(payload.id);
             // console.log('user at passport', user)
             return done(null, user || false);
@@ -17,4 +18,3 @@ module.exports = (passport) => {
         }
     }));
 }
-

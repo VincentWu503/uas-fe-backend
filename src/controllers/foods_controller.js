@@ -7,7 +7,7 @@ exports.getFoods = async (req, res, next) =>{
         const limit = parseInt(req.query.limit) || 8;
         const offset = (page - 1) * limit;
 
-        const dbFoods = await foodsModel.fetchAll(limit, offset);
+        const dbFoods = await foodsModel.findAll(limit, offset);
         if(!dbFoods) return res.status(500).send("Error on fetching foods data.");
 
         let result = []
@@ -41,7 +41,7 @@ exports.getFoodById = async (req, res, next) => {
     try{
         const foodId = req.params.id
 
-        const food =  await foodsModel.fetchOne(foodId);
+        const food =  await foodsModel.findOne(foodId);
 
         const base64Str = food.image_bytes.toString('base64');
         if (food){
@@ -131,7 +131,7 @@ exports.updateFoodById = async (req, res, next) => {
         }
         const foodId = req.params.id;
 
-        const exists = await foodsModel.fetchOne(foodId);
+        const exists = await foodsModel.findOne(foodId);
         if (!exists) {
             return res.status(404).send("Food item doesn't exists!");
         }
@@ -192,7 +192,7 @@ exports.deleteFoodById = async (req, res, next) => {
     try{
         const foodId = req.params.id
 
-        const exists = await foodsModel.fetchOne(foodId);;
+        const exists = await foodsModel.findOne(foodId);;
 
         if (!exists){
             return res.status(404).send("Food item doesn't exists!")
