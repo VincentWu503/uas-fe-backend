@@ -2,3 +2,4 @@ node_modules
 package-lock.json
 .env
 tests
+src/config/ca.pem

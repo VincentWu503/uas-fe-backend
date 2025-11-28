@@ -2,10 +2,12 @@ const pool = require('../config/db.js')
 
 exports.findAll = async () => {
     try{
+        console.log('running find all address model')
         const sqlQuery = 'SELECT * FROM address'
         const res = await pool.query(sqlQuery);
         return res.rows;
     } catch (err){
+        // console.log(err)
         throw new Error('Failed to get addresses', err)
     }
 }
@@ -36,7 +38,7 @@ exports.addAddress = async (alamat_lengkap, kelurahan, kabupaten_kota, provinsi)
 
 exports.deleteAddressById = async (id) => {
     try{
-        const sqlQuery = 'DELETE FROM address WHERE id = $1 RETURNING *' // Assumes PK is address_id
+        const sqlQuery = 'DELETE FROM address WHERE id = $1 RETURNING *'
         const res = await pool.query(sqlQuery, [id]);
         return res.rows[0]
     } catch (err){

@@ -1,0 +1,2 @@
+tools node pg migrate hanya digunakan saat pengembangan lokal 
+pembuatan schema di aiven langsung dengan menjalankan query sql 

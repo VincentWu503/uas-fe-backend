@@ -1,6 +1,8 @@
 const { body} = require('express-validator')
 
 function checkDecimal(value) {
+    if (value === undefined || value === null) return true
+
     const stringValue = String(value); 
     const parts = stringValue.split('.');
     const integerPart = parts[0];
@@ -39,6 +41,39 @@ exports.createUserValidator = [
         .withMessage(('Password length must be between 8 to 255 characters long!'))
 ];
 
+exports.updateUserValidator = [
+    body('new_username')
+        .optional()
+        .notEmpty().withMessage('Username is required!')
+        .isString().withMessage('Username must be of string data type!')
+        .trim().escape()
+        .matches(/^[a-zA-Z0-9_.\- ]+$/) 
+        .withMessage('Username can only contain alphanumeric characters, underscores, dots, spaces, and hyphens!')
+        .isLength({min: 3, max: 32})
+        .withMessage(('Username length must be between 3 to 32 characters long!')),
+
+    body('new_email')
+        .optional()
+        .notEmpty().withMessage('Email is required!')
+        .trim().escape()
+        .isEmail().withMessage('Invalid email address!')
+        .normalizeEmail(),
+
+    body('password')
+        .notEmpty().withMessage('Password is required!')
+        .isString().withMessage('Password must be of string data type!')
+        .isLength({min: 8, max: 255})
+        .withMessage(('Password length must be between 8 to 255 characters long!'))
+]
+
+exports.emailValidator = [
+     body('email')
+        .notEmpty().withMessage('Email is required!')
+        .trim().escape()
+        .isEmail().withMessage('Invalid email address!')
+        .normalizeEmail(),
+]
+
 exports.foodValidator = [
     body('item_name')
         .notEmpty().withMessage('Food name is required!')
@@ -50,8 +85,8 @@ exports.foodValidator = [
 
     body('category')
         .optional()
-        .isIn(['main-dish', 'drink', 'add-on'])
-        .withMessage('Category must be main-dish, drink, or add-on!'),
+        .isIn(['main-dish', 'beverages', 'vegetables', 'add-ons'])
+        .withMessage('Category must be main-dish, beverages, vegetables, or add-ons!'),
 
     body('online_price')
         .isDecimal().withMessage('Online price must be a valid decimal number')
@@ -115,7 +150,7 @@ exports.updateFoodValidator = [
     body('category')
         .optional()
         .isIn(['main-dish', 'beverages', 'vegetables', 'add-on'])
-        .withMessage('Category must be main-dish, drink, or add-on!'),
+        .withMessage('Category must be main-dish, beverages, vegetables, or add-ons!'),
 
     body('online_price')
         .optional()
@@ -209,7 +244,10 @@ exports.reviewValidator = [
 ]
 
 exports.restaurantReviewsEnumValidator = [
-    body('overview')
+    body('overviews')
+        .optional()
+        .isArray().withMessage('Overviews must be an array field!'),
+    body('overviews.*')
         .optional()
         .isIn(['rasa-enak', 'porsi-pas', 'bersih', 'lainnya'])
         .withMessage('Review overview must be rasa-enak, porsi-pas, bersih, or "lainnya"!'),

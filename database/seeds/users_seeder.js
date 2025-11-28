@@ -12,6 +12,7 @@ async function seed(){
     sqlQuery = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
     values = ['John CENA', 'test@gmail.com', hashedPassword]
     await pool.query(sqlQuery, values)
+    console.log('Successfully added users to the database.')
   } catch (err){
     console.error('An error has occured!', err)
   } finally{

@@ -2,11 +2,11 @@ const addressModels = require('../models/address_model.js');
 const { validationResult } = require('express-validator');
 
 exports.getAddresses = async (req, res, next) => {
-    console.log('req user incase of login', req.user)
+    // console.log('req user incase of login', req.user)
     try{
         const addresses = await addressModels.findAll();
         if (!addresses){
-            return res.status(500).send("Failed to find addresses!")
+            return res.status(500).json({message: "Failed to find addresses!"})
         } else{
             return res.status(200).json(addresses);
         }
@@ -54,7 +54,7 @@ exports.updateAddressById = async (req, res, next) => {
 
         const exists = await addressModels.findOne(addressId);
         if (!exists) {
-            return res.status(404).send("Address item doesn't exists!");
+            return res.status(404).json({message: "Address item doesn't exists!"});
         }
 
         if (Object.keys(req.body).length === 0) {
@@ -69,10 +69,10 @@ exports.updateAddressById = async (req, res, next) => {
         } = req.body;
 
         const updates = {};
-        if (alamat_lengkap !== undefined) updates.alamat_lengkap = alamat_lengkap;
-        if (kelurahan !== undefined) updates.kelurahan = kelurahan;
-        if (kabupaten_kota !== undefined) updates.kabupaten_kota = kabupaten_kota;
-        if (provinsi !== undefined) updates.provinsi = provinsi;
+        if (alamat_lengkap !== undefined && alamat_lengkap !== null) updates.alamat_lengkap = alamat_lengkap;
+        if (kelurahan !== undefined && kelurahan !== null) updates.kelurahan = kelurahan;
+        if (kabupaten_kota !== undefined && kabupaten_kota !== null) updates.kabupaten_kota = kabupaten_kota;
+        if (provinsi !== undefined && provinsi !== null) updates.provinsi = provinsi;
 
         if (Object.keys(updates).length === 0) {
             return res.status(400).json({ message: "No valid update fields provided." });
@@ -96,7 +96,7 @@ exports.deleteAddressById = async (req, res, next) => {
 
         const exists = await addressModels.findOne(addressId);
         if (!exists){
-            return res.status(404).send("Address item doesn't exists!")
+            return res.status(404).json({message: "Address item doesn't exists!"})
         }
 
         const deletedAddress = await addressModels.deleteAddressById(addressId);
@@ -106,7 +106,7 @@ exports.deleteAddressById = async (req, res, next) => {
                 deletedAddress
             });
         } else {
-            return res.status(500).send("Failed to delete address.");
+            return res.status(500).json({message: "Failed to delete address."});
         }
     } catch (err) {
         return next(err)

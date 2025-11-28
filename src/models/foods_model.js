@@ -1,7 +1,21 @@
 const pool = require('../config/db.js')
 
-exports.findAll = async (limit, offset) => {
+exports.findAllByCategory = async (category, limit, offset) => {
     try{
+        const sqlQuery = `SELECT * FROM foods
+                            WHERE category = $1
+                            ORDER BY item_id
+                            LIMIT $2 OFFSET $3`
+        const res = await pool.query(sqlQuery, [category, limit, offset]);
+        return res.rows;
+    } catch (err) {
+        console.log(err)
+        throw new Error('Failed to fetch food items', err)
+    }
+}
+
+exports.findAll = async (limit, offset) => {
+     try{
         const sqlQuery = `SELECT * FROM foods
                             ORDER BY item_id
                             LIMIT $1 OFFSET $2`
@@ -97,5 +111,25 @@ exports.updateFood = async (foodId, updates) => {
     } catch (err){
         console.log(err)
         throw new Error(`Failed to update food item with id ${foodId}`, err)
+    }
+}
+
+exports.countFoods = async () => {
+    try{
+        const sqlQuery = 'SELECT COUNT(item_id) FROM foods'
+        const res = await pool.query(sqlQuery);
+        return res.rows[0].count
+    } catch (err){
+        throw new Error('Failed to count food items', err)
+    }
+}
+
+exports.countByCategory = async (category) => {
+    try{
+        const sqlQuery = 'SELECT COUNT(item_id) FROM foods WHERE category = $1'
+        const res = await pool.query(sqlQuery, [category]);
+        return res.rows[0].count
+    } catch (err) {
+        throw new Error('Failed to count food items by category', err)
     }
 }

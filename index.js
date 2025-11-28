@@ -23,7 +23,9 @@ setInterval(async () =>{
   try{
     await pool.query(`DELETE FROM jwt_blacklist 
       WHERE EXTRACT(EPOCH FROM (NOW() - blacklisted_at)) > 3600`)
+    console.log('Clearing expired token on blacklist...')
   } catch (err){
+    console.err('An error occured while clearing token blacklist!')
   }
 }, intervalMs)
 

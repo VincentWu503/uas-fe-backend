@@ -2,13 +2,29 @@ const foodsModel = require('../models/foods_model.js');
 const { validationResult } = require('express-validator');
 
 exports.getFoods = async (req, res, next) =>{
+    const categories = ['main-dish', 'beverages', 'vegetables', 'add-on']
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 8;
+        const category = req.query.category;
         const offset = (page - 1) * limit;
 
-        const dbFoods = await foodsModel.findAll(limit, offset);
-        if(!dbFoods) return res.status(500).send("Error on fetching foods data.");
+        if (category && !categories.includes(category)){
+            return res.status(400).json({
+                message: "Category parameters must be main-dish, beverages, vegetables, or add-on!"
+            })
+        }
+
+        let dbFoods;
+        if (!category){
+            count = await foodsModel.countFoods();
+            dbFoods = await foodsModel.findAll(limit, offset);
+        } else{
+            count = await foodsModel.countByCategory(category);
+            dbFoods = await foodsModel.findAllByCategory(category, limit, offset);
+        }
+
+        if(!dbFoods) return res.status(500).json({message: "Error on fetching foods data."});
 
         let result = []
         dbFoods.forEach(food => {
@@ -26,8 +42,12 @@ exports.getFoods = async (req, res, next) =>{
             }
             result.push(obj)
         });
+
+        let countNumber;
+        if (count) countNumber = parseInt(count)
         return res.status(200).json({
             message: "Fetched foods on database.",
+            count: countNumber,
             currPage: page,
             itemsPerPage: limit,
             result
@@ -58,7 +78,7 @@ exports.getFoodById = async (req, res, next) => {
                 image_data_url: `data:image/${food.image_format};base64,${base64Str}`
             });
         } else{
-            return res.status(404).send("Food item doesn't exists!")
+            return res.status(404).json({message: "Food item doesn't exists!"})
         }
     } catch (err) {
         return next(err)
@@ -97,11 +117,11 @@ exports.addFood = async (req, res, next) => {
             // console.log('dasfas', matched)
             if (matched) {
                 imageFormat = matched[1]; 
-                console.log(image_base64_url.split()[1])
+                console.log(image_base64_url.split(',')[1])
 
                 imageBuffer = Buffer.from(image_base64_url.split(',')[1], 'base64');
             } else {
-                return res.status(400).send("Invalid image data!")
+                return res.status(400).json({message: "Invalid image data!"})
             }
         }
 
@@ -133,7 +153,7 @@ exports.updateFoodById = async (req, res, next) => {
 
         const exists = await foodsModel.findOne(foodId);
         if (!exists) {
-            return res.status(404).send("Food item doesn't exists!");
+            return res.status(404).json({message: "Food item doesn't exists!"});
         }
 
         if (Object.keys(req.body).length === 0) {
@@ -163,7 +183,7 @@ exports.updateFoodById = async (req, res, next) => {
                 updates.image_format = matched[1]; 
                 updates.image_bytes = Buffer.from(image_base64_url.split(',')[1], 'base64');
             } else {
-                return res.status(400).send("Invalid image data!");
+                return res.status(400).json({message: "Invalid image data!"});
             }
         }
 
@@ -195,7 +215,7 @@ exports.deleteFoodById = async (req, res, next) => {
         const exists = await foodsModel.findOne(foodId);;
 
         if (!exists){
-            return res.status(404).send("Food item doesn't exists!")
+            return res.status(404).json({message: "Food item doesn't exists!"})
         }
 
         const food =  await foodsModel.deleteFood(foodId);
